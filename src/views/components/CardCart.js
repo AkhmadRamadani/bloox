@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, FlatList, Image } from 'react-native'
-import { Rating, AirbnbRating } from 'react-native-ratings'
+// import { Rating, AirbnbRating } from 'react-native-ratings'
 import { APIAddress } from '../../system/Collection';
 
 export default class CardCart extends Component {
@@ -25,12 +25,12 @@ export default class CardCart extends Component {
                     <Text style={{ fontFamily: 'open-sans.bold', fontSize: 18 }}>{this.props.item.judul}</Text>
                     <Text style={{ fontFamily: 'open-sans.regular', fontSize: 12 }}>aawjaksdnajgdwy akdhsajhdad</Text>
                     <Text style={{ fontFamily: 'open-sans.bold', fontSize: 14 }}>Mantap</Text>
-                    <AirbnbRating
+                    {/* <AirbnbRating
                         showRating={false}
                         size={20}
                         isDisabled={true}
                         defaultRating={3}
-                    />
+                    /> */}
                 </View>
             </View>
         )

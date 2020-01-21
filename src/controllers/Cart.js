@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View } from 'react-native'
-import  CartView  from "../views/CartView";
+import CartView from "../views/CartView";
+import AsyncStorage from "@react-native-community/async-storage";
 import { APIAddress } from '../system/Collection';
 
 export default class Cart extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            dataCart : {},
-            loading : false,
-            userData : {}
+            dataCart: {},
+            loading: false,
+            userData: {}
         }
     }
     async componentDidMount() {
@@ -18,21 +19,21 @@ export default class Cart extends Component {
         });
         await this.getCartData();
     }
-    
+
     async getCartData() {
-        var url = APIAddress + 'Peminjaman?iduser='+ this.state.userData.iduser;
-        var urll =APIAddress + 'Buku';
-        await fetch(urll)
-            .then((response) => response.json())
-            .then((responseJSON) => {
-                return this.setState({
-                    dataCart: responseJSON,
-                    loading: false
-                }, console.log("responscart", responseJSON))
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        try {
+            const data = await AsyncStorage.getItem("@bookCart");
+            if (data != null) {
+                console.log("dataadas",data);
+                
+                this.setState({
+                    dataCart: data
+                })
+            }
+        } catch (error) {
+            console.log('eror', error);
+
+        }
     }
 
     render() {

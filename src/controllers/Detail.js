@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AsyncStorage from "@react-native-community/async-storage";
 import { Text, StyleSheet, View, ToastAndroid, Alert } from 'react-native'
 import DetailView from "../views/DetailView";
 import { APIAddress } from '../system/Collection';
@@ -11,6 +12,7 @@ export default class Detail extends Component {
             idBuku: 0,
             userData: {},
             loading: false,
+            bookData: {},
             loves: false,
             readMore: false,
             textDesk: this.props.navigation.state.params.item.deskripsi
@@ -28,12 +30,12 @@ export default class Detail extends Component {
         },
             // console.log("tesdes",this.props.navigation.state.params.item.deskripsi.toString())
         )
+        await this.getCartData();
         console.log("usedara",this.state.userData);
         
         console.log("data",this.props.navigation.state.params.item);
         
-        await this.updatingBuku()
-
+        await this.updatingBuku();
     }
 
     async _rentBook() {
@@ -53,6 +55,39 @@ export default class Detail extends Component {
 
     }
 
+    async _saveToAsync(params){
+        try {
+            await AsyncStorage.setItem("@bookCart", JSON.stringify(params))
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getCartData() {
+        try {
+            const data = await AsyncStorage.getItem("@bookCart");
+            if (data != null) {
+                
+                this.setState({
+                    bookData: data
+                })
+            }
+            console.log("Asahdgwuhi",data);
+            
+        } catch (error) {
+            console.log('eror', error);
+
+        }
+    }
+
+    async _removeCartData(){
+        try {
+            await AsyncStorage.removeItem("@bookCart")
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async _pinjamBuku() {
         this.setState({
             loading: true
@@ -70,6 +105,13 @@ export default class Detail extends Component {
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                // this._removeCartData();
+                
+                var newData =  Object.assign({},this.state.data,responseJson,this.state.bookData);
+                console.log("ajawhdkashdkahdkw", newData);
+                
+                // this._saveToAsync(newData);
+
                 this.updatingBuku();
             })
             .catch((error) => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions, ImageBackground, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 import { APIAddress } from '../system/Collection';
 import Button from './components/Button';
-import { Rating, AirbnbRating } from 'react-native-ratings';
+// import { Rating, AirbnbRating } from 'react-native-elements';
 
 export default class DetailView extends Component {
     constructor(props) {
@@ -81,23 +81,25 @@ export default class DetailView extends Component {
                                     </View>
                                     <View style={{ height: 40, width: 1, backgroundColor: '#444', }} /> */}
                                     <View style={{ alignItems: 'center', alignSelf: 'center' }}>
-                                        {/* 
+                                    
+                                        
 
                                         {(() => {
-                                            for (let index = 3; index < 4; index++) {
-                                                return (
-                                                    <Image style={{ width: 30, height: 30, marginHorizontal: 10 }} source={require('../assets/images/star-fill.png')}></Image>
-                                                // <Text>{index}</Text>
-                                                    )
-                                            }
-                                        })()} */}
-                                        <AirbnbRating
+                                            // for (let index = 0; index < 4; index++) {
+                                            //     return (
+                                            //      <Image style={{ width: 30, height: 30, marginHorizontal: 10 }} source={require('../assets/images/star-fill.png')}></Image>
+                                            //         // <Text>{index}</Text>
+                                            //     )
+                                            // }
+                                        })()}
+                                        
+                                        {/* <AirbnbRating
                                             count={5}
                                             defaultRating={this.props.state.data.jumlah_rating}
                                             size={30}
                                             showRating={false}
                                             isDisabled={true}
-                                        />
+                                        /> */}
                                         <Text style={{ fontFamily: "open-sans.bold" }}>{this.props.state.data.jumlah_rating} star rates</Text>
                                     </View>
                                 </View>

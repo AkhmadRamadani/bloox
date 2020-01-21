@@ -18,7 +18,7 @@ export default class CartView extends Component {
                     }}
                     keyExtractor={(item, index) => index.toString()}
                 /> */}
-                <CardCart item={this.props.state.dataCart[0]}></CardCart>
+                {/* <CardCart item={this.props.state.dataCart[0]}></CardCart> */}
             </View>
         )
     }
