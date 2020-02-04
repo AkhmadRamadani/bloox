@@ -1,8 +1,9 @@
 import React from "react";
-import { Dimensions, StyleSheet, TouchableOpacity, Image, View } from "react-native";
+import { Dimensions, StyleSheet, TouchableOpacity, Image, View, Text } from "react-native";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack"
 import { createDrawerNavigator, DrawerActions } from "react-navigation-drawer";
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import LoginPage from "../controllers/Login";
 import RegisterPage from "../controllers/Register";
 import HomePage from "../controllers/Home";
@@ -13,6 +14,8 @@ import DetailPage from "../controllers/Detail";
 import SideMenu from "../views/components/SideMenu";
 import ProfilePage from "../controllers/Profile";
 import CartPage from "../controllers/Cart";
+import HistoryPage from "../controllers/History";
+import HistorySelesaiPage from "../controllers/HistorySelesai";
 
 const { width, height } = Dimensions.get('window')
 
@@ -60,7 +63,7 @@ const HomeStack = createStackNavigator({
             headerLeft: <Header navigation={navigation} back={false} />,
             headerTitleStyle: styles.headerTitle,
             headerRight: (
-                <View style={{flexDirection:'row'}}>
+                <View style={{ flexDirection: 'row' }}>
                     <TouchableOpacity
                         style={{ marginRight: 20 }}
                         onPress={() => navigation.navigate("Cart")}>
@@ -103,8 +106,21 @@ const HomeStack = createStackNavigator({
     },
     Cart: {
         screen: CartPage,
-        navigationOptions: ({ }) => ({
-            header: null
+        navigationOptions: ({ navigation }) => ({
+            header: <View style={{
+                flexDirection: 'row', width: Dimensions.get("window").width,
+                paddingHorizontal: 20,
+                paddingVertical: 12.5,
+                backgroundColor: "#fff"
+            }}>
+                <TouchableOpacity style={{ justifyContent: 'center', marginRight: 25 }} onPress={() => navigation.goBack()}>
+                    <Image source={require('../assets/images/back.png')} style={{ width: 15, height: 15 }}></Image>
+                </TouchableOpacity>
+
+                <View style={{ flex: 0.85 }}>
+                    <Text style={{ fontFamily: 'open-sans.bold', fontSize: 18, color: '#444', alignSelf: "center" }}> Cart </Text>
+                </View>
+            </View>
         })
     }
 })
@@ -145,6 +161,57 @@ const ProfileStack = createStackNavigator({
     }
 })
 
+const History1Stack = createStackNavigator({
+    History: {
+        screen: HistoryPage,
+        navigationOptions: ({ navigation }) => ({
+            title: 'History',
+            headerStyle: styles.headerStyle,
+            headerLeft: <Header navigation={navigation} back={false} />,
+            headerTitleStyle: styles.headerTitle
+        })
+    }
+})
+
+const History2Stack = createStackNavigator({
+    History: {
+        screen: HistorySelesaiPage,
+        navigationOptions: ({ navigation }) => ({
+            title: 'History',
+            headerStyle: styles.headerStyle,
+            headerLeft: <Header navigation={navigation} back={false} />,
+            headerTitleStyle: styles.headerTitle
+        })
+    }
+})
+
+const HistoryStack = createMaterialBottomTabNavigator({
+    Dipinjam: {
+        screen: History1Stack,
+        navigationOptions: {
+            tabBarLabel: 'Masih Dipinjam',
+            tabBarColor: "#2ECC71",
+            tabBarIcon: <View>
+                <Image style={{width: 20, height: 20}} source={require("../assets/images/layers.png")}></Image>
+            </View>
+        }
+    },
+    Selesai: {
+        screen: History2Stack,
+        navigationOptions: {
+            tabBarLabel: 'Selesai',
+            tabBarColor: "#3498DB",
+            tabBarIcon: <View>
+                <Image style={{width: 20, height: 20}} source={require("../assets/images/check-circle.png")}></Image>
+            </View>
+        }
+    }
+}, {
+    initialRouteName: "Dipinjam",
+    shifting: true,
+    barStyle: { backgroundColor: '#5E72E4' },
+})
+
 const Drawer = createDrawerNavigator(
     {
         Home: {
@@ -152,6 +219,9 @@ const Drawer = createDrawerNavigator(
         },
         Category: {
             screen: CategoryStack
+        },
+        History: {
+            screen: HistoryStack
         },
         Profile: {
             screen: ProfileStack,

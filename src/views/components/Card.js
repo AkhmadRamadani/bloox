@@ -48,7 +48,7 @@ export default class Card extends Component {
                         backgroundColor: 'rgba(0,0,0,0.5)',
                         justifyContent: 'space-evenly',
                         flexDirection: 'row',
-                        alignItems:'center',
+                        alignItems: 'center',
                         margin: 5,
                         bottom: 0,
                         position: "absolute",
@@ -72,7 +72,7 @@ export default class Card extends Component {
                         fontSize: 14,
 
                     }}
-                        numberOfLines={2}
+                        numberOfLines={1}
                     >{this.props.item.judul}</Text>
 
                     <Text style={{
@@ -80,6 +80,8 @@ export default class Card extends Component {
                         fontSize: 12,
                         color: '#777'
                     }}
+                        numberOfLines={1}
+
                     >{this.props.item.pengarang}</Text>
 
                     <Text style={{

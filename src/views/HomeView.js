@@ -50,7 +50,7 @@ export default class HomeView extends Component {
         return (
             <ScrollView style={styles.container}>
 
-                <StatusBar backgroundColor={'#000'} barStyle={'light-content'} />
+                <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
                 <View style={{ marginBottom: 10 }}>
                     <TouchableOpacity
                         onPress={() => this.props.navigation.navigate("Result", { name: "Popular Books", cat: 1 })}

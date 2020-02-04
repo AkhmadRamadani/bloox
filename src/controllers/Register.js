@@ -32,6 +32,7 @@ export default class Register extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                action: 'create',
                 username: this.state.username,
                 password: this.state.password,
                 fullname: this.state.fullname,

@@ -44,6 +44,7 @@ export default class Login extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                action: 'login',
                 username: this.state.username,
                 password: this.state.password
             })

@@ -8,7 +8,7 @@ export default class SideMenuLayout extends Component {
         super(props)
 
         this.state = {
-            menu: ["Home", "Category", "Search", "Profile"]
+            menu: ["Home", "Category", "Search","History", "Profile"]
         }
     }
 
@@ -32,7 +32,7 @@ export default class SideMenuLayout extends Component {
                 {/* <Image style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center', margin: 20 }} source={{ uri: APIAddress + this.props.navigation.state.params.profil.image }}></Image> */}
                 {/* <Text style={{ fontFamily: 'open-sans.bold', fontSize: 18, color: '#fff', alignSelf:'center' }}>{this.props.navigation.state.params.profil.fullname}</Text> */}
                 {/* <Text style={{ fontFamily: 'open-sans.bold', fontSize: 16, color: '#fff', alignSelf:'center' }}>{this.props.navigation.state.params.profil.email}</Text> */}
-                <Text style={styles.logo}>B<Text style={{ color: "aqua" }}>L</Text>OOX,</Text>
+                <Text style={styles.logo}>B<Text style={{ color: "#5E72E4" }}>L</Text>OOX,</Text>
 
                 {/* <View style={{height: 1, width: '100%', backgroundColor:'#f2f2f2', marginTop: 20}}></View> */}
 
@@ -43,7 +43,7 @@ export default class SideMenuLayout extends Component {
                             key={index}
                             onPress={() => navigation.navigate(name)}>
                             <Text
-                                style={[styles.menuText, { color: activeItemKey === name ? "aqua" : "#fff" }]}
+                                style={[styles.menuText, { color: activeItemKey === name ? "#5E72E4" : "#000" }]}
                                 children={name}
                             />
                         </TouchableOpacity>
@@ -68,7 +68,7 @@ export default class SideMenuLayout extends Component {
                         { cancelable: true },
                     )}
                 >
-                    <Text style={[styles.menuText, { color: '#fff' }]}>Logout</Text>
+                    <Text style={[styles.menuText, { color: '#000' }]}>Logout</Text>
                 </TouchableOpacity>
 
             </View>
@@ -79,7 +79,7 @@ export default class SideMenuLayout extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 12,
-        backgroundColor: "#000",
+        backgroundColor: "#fff",
         flex: 1,
         flexDirection: 'column'
     },
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     logo: {
         fontFamily: 'open-sans.bold',
         fontSize: 36,
-        color: "#fff"
+        color: "#000"
     }
 })
 

@@ -28,7 +28,7 @@ export default class DetailView extends Component {
                     flexDirection: 'row', width: Dimensions.get("window").width,
                     paddingHorizontal: 20,
                     paddingVertical: 12.5,
-                    backgroundColor: "#fff"
+                    backgroundColor: '#fff'
                 }}>
                     <TouchableOpacity style={{ justifyContent: 'center', marginRight: 25 }} onPress={() => this.props.navigation.goBack()}>
                         <Image source={require('../assets/images/back.png')} style={{ width: 15, height: 15 }}></Image>
@@ -81,8 +81,8 @@ export default class DetailView extends Component {
                                     </View>
                                     <View style={{ height: 40, width: 1, backgroundColor: '#444', }} /> */}
                                     <View style={{ alignItems: 'center', alignSelf: 'center' }}>
-                                    
-                                        
+
+
 
                                         {(() => {
                                             // for (let index = 0; index < 4; index++) {
@@ -92,7 +92,7 @@ export default class DetailView extends Component {
                                             //     )
                                             // }
                                         })()}
-                                        
+
                                         {/* <AirbnbRating
                                             count={5}
                                             defaultRating={this.props.state.data.jumlah_rating}
@@ -147,19 +147,32 @@ export default class DetailView extends Component {
                     this.props.state.loading == true ?
                         <View />
                         :
-                        <Button
-                            label={"Rent Book"}
-                            style={{
-                                position: "absolute",
-                                bottom: 0,
-                                right: 0,
-                                width: "100%",
-                                borderRadius: 0,
-                                borderTopRightRadius: 12,
-                                borderTopLeftRadius: 12
-                            }}
-                            labelStyle={{ fontSize: 20, alignSelf: 'center' }}
-                            onPress={() => this.props.method.rentBook()} />
+                        <View style={{
+                            flex: 1, flexDirection: "row",
+                            position: "absolute",
+                            bottom: 0,
+                            right: 0,
+                        }}>
+                            <Button
+                                label={"Rent Book"}
+                                style={{
+                                    width: "50%",
+                                    borderRadius: 0,
+                                    borderTopLeftRadius: 12
+                                }}
+                                labelStyle={{ fontSize: 20, alignSelf: 'center' }}
+                                onPress={() => this.props.method.rentBook()} />
+                            <Button
+                                label={"Add to Cart"}
+                                style={{
+                                    width: "50%",
+                                    borderRadius: 0,
+                                    borderTopRightRadius: 12,
+                                    backgroundColor: '#2ECC71'
+                                }}
+                                labelStyle={{ fontSize: 20, alignSelf: 'center' }}
+                                onPress={() => this.props.method.rentBook()} />
+                        </View>
                 }
 
             </View>

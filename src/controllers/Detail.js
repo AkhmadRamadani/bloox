@@ -99,9 +99,9 @@ export default class Detail extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                iduser: this.state.userData.iduser,
+                iduser: this.state.userData[0].iduser,
                 idbuku: this.state.data.idbuku,
-            }, console.log(this.state.userData.iduser))
+            }, console.log("idaiijdiahwqjlkakskdaksse",this.state.userData[0].iduser))
         })
             .then((response) => response.json())
             .then((responseJson) => {

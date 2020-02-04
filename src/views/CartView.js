@@ -1,24 +1,51 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, FlatList } from 'react-native'
+import { Text, StyleSheet, View, FlatList, Dimensions, TouchableOpacity, Image } from 'react-native'
 import CardCart from "./components/CardCart";
 
 export default class CartView extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
+        this.state = {
+            data: [
+                {
+                    "judul": "the missing rose",
+                },
+                {
+                    "judul": "the missing rose",
+                },
+                {
+                    "judul": "the missing rose",
+                },
+                {
+                    "judul": "the missing rose",
+                },
+                {
+                    "judul": "the missing rose",
+                },
+                {
+                    "judul": "the missing rose",
+                },
+                {
+                    "judul": "the missing rose",
+                }
+            ]
+        }
     }
     render() {
         return (
-            <View style={{ padding: 10, flex: 1 }}>
-                {/* <FlatList
-                    data={this.props.state.dataCart}
-                    renderItem={({ item, index }) => {
-                        return (
-                            <CardCart item={item} />
-                        )
-                    }}
-                    keyExtractor={(item, index) => index.toString()}
-                /> */}
-                {/* <CardCart item={this.props.state.dataCart[0]}></CardCart> */}
+            <View style={{ flex: 1, backgroundColor: "#f2f2f2" }}>
+                <View style={{paddingHorizontal: 10}}>
+                    <FlatList
+                        data={this.state.data}
+                        showsVerticalScrollIndicator={false}
+                        renderItem={({ item, index }) => {
+                            return (
+                                <CardCart item={item} />
+                            )
+                        }}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                </View>
             </View>
         )
     }

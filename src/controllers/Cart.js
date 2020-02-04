@@ -38,7 +38,7 @@ export default class Cart extends Component {
 
     render() {
         return (
-            <CartView state={this.state}></CartView>
+            <CartView state={this.state} navigation={this.props.navigation}></CartView>
         )
     }
 }
