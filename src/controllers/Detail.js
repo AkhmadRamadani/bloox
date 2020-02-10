@@ -12,13 +12,16 @@ export default class Detail extends Component {
             idBuku: 0,
             userData: {},
             loading: false,
-            bookData: {},
+            bookData: [],
             loves: false,
             readMore: false,
-            textDesk: this.props.navigation.state.params.item.deskripsi
+            textDesk: this.props.navigation.state.params.item.deskripsi,
+            beenAdded: false,
         }
         this.method = {
-            rentBook: this._rentBook.bind(this)
+            rentBook: this._rentBook.bind(this),
+            addToCart: this._addToCart.bind(this),
+            remove: this._removeCartData.bind(this),
         }
     }
 
@@ -31,11 +34,12 @@ export default class Detail extends Component {
             // console.log("tesdes",this.props.navigation.state.params.item.deskripsi.toString())
         )
         await this.getCartData();
-        console.log("usedara",this.state.userData);
-        
-        console.log("data",this.props.navigation.state.params.item);
-        
+        console.log("usedara", this.state.userData);
+
+        console.log("data", this.props.navigation.state.params.item);
+
         await this.updatingBuku();
+        await this.filterItem();
     }
 
     async _rentBook() {
@@ -55,7 +59,7 @@ export default class Detail extends Component {
 
     }
 
-    async _saveToAsync(params){
+    async _saveToAsync(params) {
         try {
             await AsyncStorage.setItem("@bookCart", JSON.stringify(params))
         } catch (error) {
@@ -67,25 +71,62 @@ export default class Detail extends Component {
         try {
             const data = await AsyncStorage.getItem("@bookCart");
             if (data != null) {
-                
+
                 this.setState({
-                    bookData: data
+                    bookData: JSON.parse(data)
                 })
             }
-            console.log("Asahdgwuhi",data);
-            
+            console.log("Asahdgwuhi", this.state.bookData);
+
         } catch (error) {
             console.log('eror', error);
 
         }
     }
 
-    async _removeCartData(){
+    async _removeCartData() {
         try {
             await AsyncStorage.removeItem("@bookCart")
         } catch (error) {
             console.log(error);
         }
+    }
+
+    async _addToCart() {
+        Alert.alert(
+            'Add to Cart',
+            'Do you wanna add this book to cart ?',
+            [
+                {
+                    text: 'Cancel',
+                    // onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: () => [this.add(), this.props.navigation.navigate("Cart")] },
+            ],
+            { cancelable: true },
+        )
+    }
+
+    async add() {
+        var newData = Object.assign({}, this.state.data)
+        this.state.bookData.push(newData)
+        console.log("newwwdatajwadoi", this.state.bookData);
+        // await this._removeCartData();
+        await this._saveToAsync(this.state.bookData)
+
+    }
+
+    makeid() {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < 16; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        console.log(result);
+
+        return result;
     }
 
     async _pinjamBuku() {
@@ -99,17 +140,19 @@ export default class Detail extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                action: "create",
+                idtransaksi: this.makeid(),
                 iduser: this.state.userData[0].iduser,
                 idbuku: this.state.data.idbuku,
-            }, console.log("idaiijdiahwqjlkakskdaksse",this.state.userData[0].iduser))
+            }, console.log("idaiijdiahwqjlkakskdaksse", this.state.userData[0].iduser))
         })
             .then((response) => response.json())
             .then((responseJson) => {
                 // this._removeCartData();
-                
-                var newData =  Object.assign({},this.state.data,responseJson,this.state.bookData);
+
+                var newData = Object.assign({}, this.state.data, responseJson, this.state.bookData);
                 console.log("ajawhdkashdkahdkw", newData);
-                
+
                 // this._saveToAsync(newData);
 
                 this.updatingBuku();
@@ -142,6 +185,16 @@ export default class Detail extends Component {
             });
         // console.log(APIAddress + 'Buku?idbuku=' + this.state.idBuku)
 
+    }
+
+    async filterItem() {
+        var test = this.state.bookData.find(buku => buku.idbuku == this.state.data.idbuku)
+        if (test != undefined) {
+            this.setState({
+                beenAdded: true
+            })
+        }
+        console.log("coba", test);
     }
 
     render() {

@@ -26,9 +26,9 @@ export default class Login extends Component {
         })
     }
 
-    _storeData(params) {
+    async _storeData(params) {
         try {
-            AsyncStorage.setItem('@UserData', JSON.stringify(params))
+            await AsyncStorage.setItem('@UserData', JSON.stringify(params))
         } catch (error) {
             console.log(error);
         }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, Image, TouchableOpacity, StyleSheet, StatusBar, Alert } from 'react-native'
+import { Text, View, FlatList, Image, TouchableOpacity, StyleSheet, StatusBar, Alert, BackHandler } from 'react-native'
 import { Colors, APIAddress } from '../../system/Collection'
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -14,7 +14,8 @@ export default class SideMenuLayout extends Component {
 
     async deleteUserData() {
         try {
-            await AsyncStorage.removeItem("@UserData");
+            await AsyncStorage.clear();
+            BackHandler.exitApp();
             return true;
         }
         catch (exception) {

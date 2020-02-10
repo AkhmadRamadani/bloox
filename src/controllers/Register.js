@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, Alert, ToastAndroid } from 'react-native'
 import  RegisterView  from "../views/RegisterView";
 import AsyncStorage from "@react-native-community/async-storage";
 import { APIAddress } from '../system/Collection';
@@ -50,12 +50,13 @@ export default class Register extends Component {
                 }
                 else {
                     console.log('Sucess');
-                    this._storeData(responseJson)
-                    this.props.navigation.navigate("Home", { profil: responseJson });
+                    ToastAndroid.show('Register Success', ToastAndroid.SHORT);
+                    this.props.navigation.navigate("Login");
                 }
             })
             .catch((error) => {
                 this.setState({ loading: !this.state.loading })
+                ToastAndroid.show('Register Gagal', ToastAndroid.SHORT);
                 console.log(error);
             })
     }

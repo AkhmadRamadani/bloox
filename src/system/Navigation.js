@@ -16,6 +16,7 @@ import ProfilePage from "../controllers/Profile";
 import CartPage from "../controllers/Cart";
 import HistoryPage from "../controllers/History";
 import HistorySelesaiPage from "../controllers/HistorySelesai";
+import BelumDiambilPage from "../controllers/BelumDiambil";
 
 const { width, height } = Dimensions.get('window')
 
@@ -185,7 +186,29 @@ const History2Stack = createStackNavigator({
     }
 })
 
+const BelumDiambil = createStackNavigator({
+    History: {
+        screen: BelumDiambilPage,
+        navigationOptions: ({ navigation }) => ({
+            title: 'History',
+            headerStyle: styles.headerStyle,
+            headerLeft: <Header navigation={navigation} back={false} />,
+            headerTitleStyle: styles.headerTitle
+        })
+    }
+})
+
 const HistoryStack = createMaterialBottomTabNavigator({
+    Book: {
+        screen: BelumDiambil,
+        navigationOptions: {
+            tabBarLabel: 'Booking',
+            tabBarColor: "red",
+            tabBarIcon: <View>
+                <Image style={{width: 20, height: 20}} source={require("../assets/images/book.png")}></Image>
+            </View>
+        }
+    },
     Dipinjam: {
         screen: History1Stack,
         navigationOptions: {

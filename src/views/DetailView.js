@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions, ImageBackground, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Image, Dimensions, ImageBackground, ScrollView, SafeAreaView, ActivityIndicator, Alert } from 'react-native'
 import { APIAddress } from '../system/Collection';
 import Button from './components/Button';
 // import { Rating, AirbnbRating } from 'react-native-elements';
@@ -158,10 +158,11 @@ export default class DetailView extends Component {
                                 style={{
                                     width: "50%",
                                     borderRadius: 0,
-                                    borderTopLeftRadius: 12
+                                    borderTopLeftRadius: 12,
                                 }}
                                 labelStyle={{ fontSize: 20, alignSelf: 'center' }}
                                 onPress={() => this.props.method.rentBook()} />
+                           
                             <Button
                                 label={"Add to Cart"}
                                 style={{
@@ -171,7 +172,9 @@ export default class DetailView extends Component {
                                     backgroundColor: '#2ECC71'
                                 }}
                                 labelStyle={{ fontSize: 20, alignSelf: 'center' }}
-                                onPress={() => this.props.method.rentBook()} />
+                                onPress={() => {this.props.state.beenAdded == true
+                                 ? Alert.alert("You have been added this book to cart") 
+                                 : this.props.method.addToCart()}} />
                         </View>
                 }
 
