@@ -53,7 +53,18 @@ export default class Login extends Component {
             .then((responseJson) => {
                 this.setState({ loading: !this.state.loading })
                 if (responseJson.status != undefined) {
-                    alert(false)
+                    Alert.alert(
+                        'Log in false ',
+                        'Your username and password doesn\'t match',
+                        [
+                            {
+                                text: 'Ok',
+                                // onPress: () => console.log('Cancel Pressed'),
+                                style: 'cancel',
+                            },
+                        ],
+                        { cancelable: true }
+                    )
                 }
                 else {
                     this._storeData(responseJson);
@@ -63,8 +74,8 @@ export default class Login extends Component {
             .catch((error) => {
                 this.setState({ loading: !this.state.loading })
                 Alert.alert(
-                    'Log in false ',
-                    'Your username and password doesn\'t match',
+                    'Cek koneksi anda',
+                    'Cek koneksi anda dan ulangi lagi',
                     [
                         {
                             text: 'Ok',

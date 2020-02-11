@@ -57,7 +57,8 @@ export default class HistorySelesai extends Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    historyData: responseJson
+                    historyData: responseJson,
+                    loading: false
                 })
                 console.log("mystory",this.state.historyData);
                 

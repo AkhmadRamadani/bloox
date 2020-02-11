@@ -7,7 +7,7 @@ export default class CardCart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+
         }
     }
     render() {
@@ -23,11 +23,16 @@ export default class CardCart extends Component {
                 borderWidth: 1,
                 borderColor: "#f2f2f2",
             }}>
-                <View style={{ flex: 0.2 }}>
-                    <TouchableOpacity onPress={() => this.props.deleteItem()}>
-                        <Text style={{ fontFamily: 'open-sans.bold' }}>X</Text>
-                    </TouchableOpacity>
-                </View>
+                {   
+                    this.props.history == true ?
+                    <View/>
+                    :
+                    <View style={{ flex: 0.2 }}>
+                        <TouchableOpacity onPress={() => this.props.deleteItem()}>
+                            <Text style={{ fontFamily: 'open-sans.bold' }}>X</Text>
+                        </TouchableOpacity>
+                    </View>
+                }
                 <View style={{ flex: 1, width: Dimensions.get("window").width / 3.8, height: 125, borderRadius: 6 }}>
                     <Image style={{ borderRadius: 6, resizeMode: 'cover', height: 125, width: Dimensions.get("window").width / 3.8 }}
                         source={{ uri: APIAddress + this.props.item.image }}

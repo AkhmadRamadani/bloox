@@ -68,7 +68,7 @@ export default class History extends Component {
             body: JSON.stringify({
                 action: "history",
                 iduser: this.state.userData[0].iduser,
-                idstatus: 1,
+                idstatus: 2,
             }, console.log("idaiijdiahwqjlkakskdaksse", this.state.userData[0].iduser))
         })
             .then((response) => response.json())
@@ -83,6 +83,8 @@ export default class History extends Component {
                         groups[date].push(data);
                         return groups;
                     }, {})
+                    ,
+                    loading: false
                 })
                 console.log("mystory", Object.entries(this.state.historyData));
 

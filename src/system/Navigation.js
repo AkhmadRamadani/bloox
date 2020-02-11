@@ -178,7 +178,7 @@ const History2Stack = createStackNavigator({
     History: {
         screen: HistorySelesaiPage,
         navigationOptions: ({ navigation }) => ({
-            title: 'History',
+            title: 'Selesai',
             headerStyle: styles.headerStyle,
             headerLeft: <Header navigation={navigation} back={false} />,
             headerTitleStyle: styles.headerTitle
@@ -190,7 +190,7 @@ const BelumDiambil = createStackNavigator({
     History: {
         screen: BelumDiambilPage,
         navigationOptions: ({ navigation }) => ({
-            title: 'History',
+            title: 'Booking',
             headerStyle: styles.headerStyle,
             headerLeft: <Header navigation={navigation} back={false} />,
             headerTitleStyle: styles.headerTitle

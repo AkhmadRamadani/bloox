@@ -8,7 +8,7 @@ export default class SideMenuLayout extends Component {
         super(props)
 
         this.state = {
-            menu: ["Home", "Category", "Search","History", "Profile"]
+            menu: ["Home", "Category", "Search","History"]
         }
     }
 
